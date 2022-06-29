@@ -1,5 +1,28 @@
 <template>
   <div class="oy-auto ox-hidden fl-grow-1">
+    <div class="pa-10">
+      <div class="fs-8 text-primary-tint-8">
+        Website under development...
+      </div>
+      <div class="ml-1 mt-n1 pb-5 fs-4 text-primary-tint-7">
+        But you can test some stuff.
+      </div>
+      <div class="pb-5 fs-5 fw-3 text-white-blend-3">
+        When you create tasks with priorities. We'll randomize a task for you to
+        focus on.
+        <br />
+
+        This is based on the priority of the task (a task with priority 2 will
+        have double the chance of a task with priority 1).
+        <br />
+        <br />
+        When you skip a session break, you can use that time later.
+        <br />
+        If you skip your 5 min break, you'll have a 10 min break before the next
+        session, and so on.
+      </div>
+    </div>
+
     <a-row
       class="mt-2 md:mt-15 mx-5"
       cols="12 12 12"
@@ -129,7 +152,11 @@
           <a-item>
             {{ session.name }}
             <template #end>
-              {{ session.time < 1 ? session.time.toFixed(1) : session.time }}
+              {{
+                session.time < 1
+                  ? session.time.toFixed(1)
+                  : parseInt(session.time)
+              }}
               min
             </template>
           </a-item>
