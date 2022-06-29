@@ -1,6 +1,6 @@
 import { openDB } from 'idb'
-
-const db = await openDB('foke', 2, {
+let db
+openDB('foke', 2, {
   upgrade(db) {
     db.createObjectStore('tasks', {
       keyPath: 'id',
@@ -12,6 +12,8 @@ const db = await openDB('foke', 2, {
     })
     db.createObjectStore('userData')
   },
+}).then((database) => {
+  db = database
 })
 export default defineNuxtPlugin(() => {
   return {
