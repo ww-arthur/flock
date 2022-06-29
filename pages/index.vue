@@ -29,7 +29,6 @@
       md="4 4 8"
       gutter="4"
       justify="center"
-      align="center"
     >
       <template #0>
         <div>
