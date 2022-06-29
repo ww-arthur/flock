@@ -1,0 +1,29 @@
+<template>
+  <svg
+    version="1.1"
+    id="Layer_1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    x="0px"
+    y="0px"
+    viewBox="0 0 24 24"
+    style="enable-background: new 0 0 24 24; width: 40px;"
+    class="ar-1"
+    xml:space="preserve"
+  >
+    <path
+      class="background-tertiary"
+      d="M17.8,12.1c0-3.3-2.7-6-6-6c-3.3,0-6,2.7-6,6s2.7,6,6,6C15.1,18.1,17.8,15.4,17.8,12.1"
+    />
+    <path
+      class="background-tertiary-tint-1"
+      d="M4.5,4.5c0.6-0.6,1.7-0.6,2.3,0c0.6,0.6,0.6,1.7,0,2.3c-0.6,0.6-1.7,0.6-2.3,0C3.9,6.2,3.9,5.1,4.5,4.5"
+    />
+    <path
+      class="background-tertiary-tint-3"
+      d="M7.1,3.3c3.9-2.2,9-1.6,12.2,1.8c3.6,3.8,3.6,9.9,0,13.7C15.4,23,8.9,23.1,4.9,19.1c-3.3-3.3-3.8-8.2-1.6-12
+	l0,0c0.8,0.6,1.3,1.7,1,2.7c-0.9,3,0,6.3,2.7,8.5c2.9,2.4,7.2,2.4,10.1,0c3.8-3.1,4-8.6,0.7-12c-2.1-2.1-5.2-2.8-7.9-2.1
+	C8.8,4.6,7.7,4.2,7.1,3.3L7.1,3.3z"
+    />
+  </svg>
+</template>

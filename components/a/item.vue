@@ -1,7 +1,12 @@
 <template>
-  <div
-    class="item po-relative ov-hidden row ai-center md:px-2 jc-center md:jc-space-between py-3 fl-wrap ro-2"
-    :class="`background-${color}-alpha-9-hover  bloom-2-${color}-alpha-7-hover`"
+  <NuxtLink
+    :to="toRoute.href"
+    class="item transition po-relative ov-hidden row ai-center jc-center md:px-2 py-3 fl-wrap ro-2"
+    :class="`${
+      isActive
+        ? 'background-tertiary-shade-5 background-tertiary-gradient-left'
+        : ''
+    }`"
   >
     <div class="di-flex ai-center jc-center md:pa-1 mx-2 ar-1">
       <slot name="icon" :attrs="iconAttrs">
@@ -28,13 +33,13 @@
     <small>
       <slot name="end"></slot>
     </small>
-  </div>
+  </NuxtLink>
 </template>
 <script setup>
 const props = defineProps({
   color: {
     type: String,
-    default: 'grey',
+    default: 'white',
   },
   icon: {
     type: String,
@@ -48,30 +53,34 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  justify: {
-    type: String,
-    default: 'space-between',
-  },
+
   text: {
     type: String,
     default: '',
   },
+  to: {
+    type: [String, Object],
+    defaul: '',
+  },
+  active: {
+    type: Boolean,
+    default: false,
+  },
 })
-</script>
-<script>
-export default {
-  data() {
-    return {
-      iconAttrs: {
-        size: this.iconSize,
-        color: this.color,
-      },
-    }
-  },
-  computed: {
-    computedClasses() {
-      return this.darkMode ? this.dark : this.light
-    },
-  },
-}
+const route = useRoute()
+const router = useRouter()
+let toRoute = computed(() => {
+  return props.to ? router.resolve(props.to) : {}
+})
+let tag = computed(() => {
+  return props.to ? 'nuxt-link' : 'div'
+})
+let isActive = computed(() => {
+  return props.active || toRoute.value.name === route.name
+})
+
+let iconAttrs = computed(() => ({
+  size: props.iconSize,
+  color: props.color,
+}))
 </script>
