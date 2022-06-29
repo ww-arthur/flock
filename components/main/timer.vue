@@ -107,10 +107,12 @@ let state = ref('stopped')
 dayjs.extend(duration)
 let type = ref('focus')
 let time = ref(dayjs.duration(props.times[type.value], 'minutes'))
+let currentDuration = time.value
 function stopTimer() {
   state.value = 'stopped'
   emit('end', { type: type.value, time: time.value.asMinutes() })
   time.value = dayjs.duration(props.times[type.value], 'minutes')
+  currentDuration = time.value
 }
 function skipBreak() {
   userData.value.accBreaks = userData.value.accBreaks + time.value.asMinutes()
@@ -125,6 +127,7 @@ function pauseTimer() {
     startTimer()
   } else {
     state.value = 'paused'
+    currentDuration = time.value
   }
 }
 function configSession(type) {
@@ -149,6 +152,7 @@ function startTimer(userInput = false) {
   clearTimeout(currentTimeout)
   if (userInput) {
     time.value = dayjs.duration(configSession(type.value), 'minutes')
+    currentDuration = time.value
   }
   if (state.value !== 'paused') {
     emit('start', type.value)
@@ -159,8 +163,9 @@ function startTimer(userInput = false) {
     if (state.value !== 'in_progress') return
     const elapsed = currentTime - start
     const seconds = Math.round(elapsed / 1000)
+    console.log(seconds)
     if (!skip) {
-      time.value = time.value.subtract(1, 'seconds')
+      time.value = currentDuration.clone().subtract(seconds, 'seconds')
     }
     const targetNext = (seconds + 1) * 1000 + start
     if (time.value.asSeconds() > 0) {
