@@ -4,8 +4,8 @@
     <label
       :class="
         isFocused || val
-          ? 'fs-2 a-input-label--active text-primary-tint-5'
-          : 'fs-5 a-input-label text-primary-tint-9'
+          ? 'fs-2 a-input-label--active text-tertiary-tint-5'
+          : 'fs-5 a-input-label text-tertiary-tint-9'
       "
       ref="label"
     >
@@ -18,14 +18,14 @@
       @focus="focus()"
       @blur="blur()"
       @input="$emit('update:modelValue', $event.target.value)"
-      :class="`a-input py-3 text-primary-tint-9`"
+      :class="`a-input py-3 text-tertiary-tint-9`"
       v-model="val"
     />
     <div class="a-bar ro-5 background-white-shade-3"></div>
     <transition name="grow-x">
       <div
         v-show="isFocused"
-        class="a-bar ro-5 background-primary transition"
+        class="a-bar ro-5 background-tertiary transition"
       ></div>
     </transition>
     <!--     <transition @enter="enterLoading" @leave="leaveLoading" :css="false">

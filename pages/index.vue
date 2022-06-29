@@ -1,10 +1,10 @@
 <template>
   <div class="oy-auto ox-hidden fl-grow-1">
     <div class="pa-10">
-      <div class="fs-8 text-primary-tint-8">
+      <div class="fs-8 text-tertiary-tint-8">
         Website under development...
       </div>
-      <div class="ml-1 mt-n1 pb-5 fs-4 text-primary-tint-7">
+      <div class="ml-1 mt-n1 pb-5 fs-4 text-tertiary-tint-7">
         But you can test some stuff.
       </div>
       <div class="pb-5 fs-5 fw-3 text-white-blend-3">
@@ -40,7 +40,7 @@
 
           <div v-for="t in orderedTasks" :key="`task_${t.id}`">
             <a-row
-              :class="t.id === currentTask.id ? 'text-primary-tint-4' : ''"
+              :class="t.id === currentTask.id ? 'text-tertiary-tint-4' : ''"
               class="px-6"
               cols="6 4 2"
               col-class="te-truncate"
@@ -70,9 +70,9 @@
             Add your tasks with priorities
           </div>
           <div class="px-3">
-            <a-card v-if="newTask" color="primary">
+            <a-card v-if="newTask" color="tertiary">
               <div
-                class="ro-top-left-5 ro-bottom-right-5 bloom-2-black-blend-6 di-inline-block py-2 px-2 fs-6 fw-6 background-primary"
+                class="ro-top-left-5 ro-bottom-right-5 bloom-2-black-blend-6 di-inline-block py-2 px-2 fs-6 fw-6 background-tertiary"
               >
                 New task
               </div>
@@ -88,7 +88,7 @@
                       :min="1"
                       :max="10"
                       v-model="task.priority"
-                      color="primary"
+                      color="tertiary"
                     >
                       {{ task.priority }}
                     </a-slider>
@@ -191,7 +191,7 @@ let tasks = ref([])
 let sessions = ref([])
 
 const orderedTasks = computed(() => {
-  return tasks.value.sort((task) => task.priority)
+  return tasks.value.sort((a, b) => b.priority - a.priority)
 })
 const groupedSessions = computed(() => {
   return sessions.value.reduce((acc, cur) => {
@@ -258,7 +258,7 @@ function endSession(data = { type: 'focus', time: 0 }) {
   if (data.type === 'focus' && currentTask.value.id) {
     let task = {
       ...currentTask.value,
-      ...{ task_id: currentTask.value.id, time: data.time },
+      ...{ task_id: currentTask.value.id, time: times.value.focus - data.time },
     }
     delete task.id
     $postSession(task).then((res) => {

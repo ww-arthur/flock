@@ -14,7 +14,7 @@
 const props = defineProps({
   color: {
     type: String,
-    default: 'primary',
+    default: 'tertiary',
   },
   rounded: {
     type: [String, Number],

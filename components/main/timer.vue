@@ -5,7 +5,7 @@
     <div class="di-flex ai-center">
       <div
         v-if="type !== 'relax'"
-        class="ro-top-left-5 ro-bottom-right-5 bloom-2-black-blend-8 di-inline-block fl-shrink-1 pa-3 fs-6 fw-6 background-primary elevated"
+        class="ro-top-left-5 ro-bottom-right-5 bloom-2-black-blend-8 di-inline-block fl-shrink-1 pa-3 fs-6 fw-6 background-tertiary elevated"
       >
         Focus Session
       </div>

@@ -12,22 +12,22 @@
       :class="`text-${color}-shade-5`"
     >
       <div
-        class="a-slider-range background-primary py-1 ro-5"
+        class="a-slider-range background-tertiary py-1 ro-5"
         :style="` flex-basis: ${val.toFixed(2)}%; width: ${val.toFixed(2)}%`"
       ></div>
       <div
-        class="a-slider-range fl-grow-1 py-1 ro-5 background-primary-tone-9"
+        class="a-slider-range fl-grow-1 py-1 ro-5 background-tertiary-tone-9"
       ></div>
       <div
         @pointerdown.stop="beginSliding"
         @pointerup="stopSliding"
         :style="`left: ${val}%`"
         class="thumb-wrapper pa-3"
-        :class="`ro-pill ar-1 background-primary-blend-10 background-primary-blend-8:hover`"
+        :class="`ro-pill ar-1 background-tertiary-blend-10 background-tertiary-blend-8:hover`"
       >
         <div
           class="thumb transition"
-          :class="`background-primary-tint-8 background-primary-tint-4-gradient-bottom-right bloom-4-black-blend-6 ro-5 px-3 fs-3 fw-6 di-flex ai-center`"
+          :class="`background-tertiary-tint-8 background-tertiary-tint-4-gradient-bottom-right bloom-4-black-blend-6 ro-5 px-3 fs-3 fw-6 di-flex ai-center`"
         >
           <slot></slot>
         </div>
@@ -58,7 +58,7 @@ const sliderProps = defineProps({
   },
   color: {
     type: String,
-    default: 'primary',
+    default: 'tertiary',
   },
   label: {
     type: String,

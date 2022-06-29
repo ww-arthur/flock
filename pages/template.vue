@@ -8,8 +8,8 @@
     <div
       class="col-10 di-flex fl-column background-black-tint-2 my-5 bloom-2-black-blend-8 ro-left-4 ov-hidden"
     >
-      <div class="background-primary">
-        <div class="fs-8 fw-7 ma-4 text-primary-tint-9">Focus session</div>
+      <div class="background-tertiary">
+        <div class="fs-8 fw-7 ma-4 text-tertiary-tint-9">Focus session</div>
       </div>
       <div
         class="oy-auto ox-hidden fl-grow-1 fl-column di-flex jc-center ai-center"
