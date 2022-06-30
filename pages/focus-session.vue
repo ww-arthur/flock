@@ -56,66 +56,74 @@
             Add your tasks with priorities
           </div>
           <div class="px-3">
-            <a-card v-if="newTask || editingTask" color="tertiary">
-              <div
-                class="ro-top-left-5 ro-bottom-right-5 bloom-2-black-blend-6 di-inline-block py-2 px-2 fs-6 fw-6 background-tertiary"
+            <transition name="grow-y">
+              <a-card
+                v-if="newTask || editingTask"
+                class="grow-y-active"
+                color="tertiary"
               >
-                {{ editingTask ? 'Edit task' : 'New task' }}
-              </div>
-              <div class="px-4 pb-4">
-                <a-row cols="12 12 12 12" md="12 12 6 6" gutter="4">
-                  <template #0>
-                    <a-input v-model="task.name" label="Task name"></a-input>
-                  </template>
-                  <template #1>
-                    <a-slider
-                      label="Priority"
-                      :step="1"
-                      :min="1"
-                      :max="10"
-                      v-model="task.priority"
-                      color="tertiary"
-                    >
-                      {{ task.priority }}
-                    </a-slider>
-                  </template>
-                  <template #2>
-                    <a-button
-                      @click="closeEditor"
-                      class="wi-100"
-                      size="1"
-                      template="text"
-                    >
-                      <a-icon size="3" class="mr-1">close</a-icon>
-                      Cancel
-                    </a-button>
-                  </template>
-                  <template #3>
-                    <a-button
-                      @click="addTask(task, tasks)"
-                      class="wi-100"
-                      size="1"
-                    >
-                      <a-icon size="3" class="mr-1">
-                        {{ editingTask ? 'pencil' : 'plus' }}
-                      </a-icon>
-                      {{ editingTask ? 'Update task' : 'Add task' }}
-                    </a-button>
-                  </template>
-                </a-row>
-              </div>
-            </a-card>
-            <a-button
-              v-if="!newTask && !editingTask"
-              @click="newTask = true"
-              class="wi-100 mt-3"
-              size="1"
-              rounded="3"
-              template="glassy"
-            >
-              <a-icon size="2" class="mr-1">plus</a-icon>
-              New task
-            </a-button>
+                <div
+                  class="ro-top-left-5 ro-bottom-right-5 bloom-2-black-blend-6 di-inline-block py-2 px-2 fs-6 fw-6 background-tertiary"
+                >
+                  {{ editingTask ? 'Edit task' : 'New task' }}
+                </div>
+                <div class="px-4 pb-4">
+                  <a-row cols="12 12 12 12" md="12 12 6 6" gutter="4">
+                    <template #0>
+                      <a-input v-model="task.name" label="Task name"></a-input>
+                    </template>
+                    <template #1>
+                      <a-slider
+                        label="Priority"
+                        :step="1"
+                        :min="1"
+                        :max="10"
+                        v-model="task.priority"
+                        color="tertiary"
+                      >
+                        {{ task.priority }}
+                      </a-slider>
+                    </template>
+                    <template #2>
+                      <a-button
+                        @click="closeEditor"
+                        class="wi-100"
+                        size="1"
+                        template="text"
+                      >
+                        <a-icon size="3" class="mr-1">close</a-icon>
+                        Cancel
+                      </a-button>
+                    </template>
+                    <template #3>
+                      <a-button
+                        @click="addTask(task, tasks)"
+                        class="wi-100"
+                        size="1"
+                      >
+                        <a-icon size="3" class="mr-1">
+                          {{ editingTask ? 'pencil' : 'plus' }}
+                        </a-icon>
+                        {{ editingTask ? 'Update task' : 'Add task' }}
+                      </a-button>
+                    </template>
+                  </a-row>
+                </div>
+              </a-card>
+            </transition>
+            <transition name="grow-y">
+              <a-button
+                v-if="!newTask && !editingTask"
+                @click="newTask = true"
+                class="wi-100 mt-3"
+                size="1"
+                rounded="3"
+                template="glassy"
+              >
+                <a-icon size="2" class="mr-1">plus</a-icon>
+                New task
+              </a-button>
+            </transition>
           </div>
         </div>
       </template>
@@ -139,12 +147,7 @@
           <a-item>
             {{ session.name }}
             <template #end>
-              {{
-                session.time < 1
-                  ? session.time.toFixed(1)
-                  : parseInt(session.time)
-              }}
-              min
+              {{ getSessionDuration(session.time) }}
             </template>
           </a-item>
         </div>
@@ -156,6 +159,11 @@
   </div>
 </template>
 <script setup lang="ts">
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(duration)
+dayjs.extend(relativeTime)
 const {
   $postTask,
   $getTasks,
@@ -244,26 +252,29 @@ function startSession(type: string) {
   if (type === 'focus') {
     notify('Time to focus', `Started focusing on ${randomTask().name}`)
   } else {
-    let task = {
+    let session = {
       ...currentTask.value,
       ...{ task_id: currentTask.value.id, time: times.value.focus },
     }
-    delete task.id
-    $postSession(task).then((res) => {
+    delete session.id
+    $postSession(session).then((res) => {
       sessions.value.push(res)
     })
     notify('Relax a little', `Started session break`)
   }
 }
+function getSessionDuration(time: number) {
+  return dayjs.duration(Math.floor(time), 'minutes').humanize()
+}
 
 function endSession(data = { type: 'focus', time: 0 }) {
   if (data.type === 'focus' && currentTask.value.id) {
-    let task = {
+    let session = {
       ...currentTask.value,
       ...{ task_id: currentTask.value.id, time: times.value.focus - data.time },
     }
-    delete task.id
-    $postSession(task).then((res) => {
+    delete session.id
+    $postSession(session).then((res) => {
       sessions.value.push(res)
     })
   }

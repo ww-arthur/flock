@@ -71,6 +71,8 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
+dayjs.extend(duration)
+
 const {
   $playStartAudio,
   $playStopAudio,
@@ -104,7 +106,6 @@ const props = defineProps({
   },
 })
 let state = ref('stopped')
-dayjs.extend(duration)
 let type = ref('focus')
 let time = ref(dayjs.duration(props.times[type.value], 'minutes'))
 let currentDuration = time.value
