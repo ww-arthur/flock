@@ -21,24 +21,7 @@
   contain: strict;
 }
 
-.a-ripple-in {
-  opacity: 0.3;
-  transform-origin: center;
-  transform: translate(-50%, -50%) scale(2.7);
-  transition: all 0.3s cubic-bezier(0.1, 0.2, 0.5, 1);
-}
-.a-ripple-out {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0);
-  transition: all 0.3s cubic-bezier(0, 0.53, 0.02, 0.97);
-}
 
-.transition {
-  transition: all 0.25s cubic-bezier(0.4, 0.2, 0.4, 1);
-}
-.transition-none {
-  transition: none !important;
-}
 .elevated {
   box-shadow: inset 0px -1px 2px #0000002f, inset 0px 1px 1px #ffffff0f;
 }

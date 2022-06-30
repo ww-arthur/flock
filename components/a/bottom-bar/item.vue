@@ -1,10 +1,10 @@
 <template>
   <NuxtLink
     :to="toRoute.href"
-    class="item transition po-relative ov-hidden row ai-center md:px-2 py-3 fl-wrap ro-2"
+    class="item transition po-relative ov-hidden col di-flex fl-column ai-center jc-center md:px-2 py-3 ro-5"
     :class="`${
       isActive
-        ? 'background-tertiary-shade-5 background-tertiary-gradient-left'
+        ? 'bloom-2-black background-tertiary-blend-9 background-tertiary-blend-9-gradient-bottom-right text-tertiary fw-7'
         : ''
     }`"
   >
@@ -81,6 +81,6 @@ let isActive = computed(() => {
 
 let iconAttrs = computed(() => ({
   size: props.iconSize,
-  color: props.color,
+  color: isActive.value ? props.color : '',
 }))
 </script>

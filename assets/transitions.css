@@ -1,0 +1,44 @@
+.a-ripple-in {
+  opacity: 0.3;
+  transform-origin: center;
+  transform: translate(-50%, -50%) scale(2.7);
+  transition: all 0.3s cubic-bezier(0.1, 0.2, 0.5, 1);
+}
+.a-ripple-out {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0.3s cubic-bezier(0, 0.53, 0.02, 0.97);
+}
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.grow-x-enter-to,
+.grow-x-leave-from {
+  width: 100%;
+}
+
+.grow-x-leave-to,
+.grow-x-enter-from {
+  width: 0;
+}
+
+
+
+.transition {
+  transition: all 0.25s cubic-bezier(0.4, 0.2, 0.4, 1);
+}
+.transition-none {
+  transition: none !important;
+}

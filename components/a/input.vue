@@ -73,20 +73,8 @@ export default {
   data() {
     return {
       isFocused: false,
-      timeout: null,
     }
   },
-  /*   watch: {
-    val() {
-      if (!this.isFocused || this.val) {
-      }
-       clearTimeout(this.timeout)
-      this.timeout = setTimeout(() => {
-        this.$emit('update:modelValue', this.val)
-      }, 1000)
-    },
-  }, */
-
   methods: {
     focus() {
       this.isFocused = true
@@ -139,15 +127,5 @@ export default {
   height: 1px;
   z-index: 0;
   width: 100%;
-}
-
-.grow-x-enter-to,
-.grow-x-leave-from {
-  width: 100%;
-}
-
-.grow-x-leave-to,
-.grow-x-enter-from {
-  width: 0;
 }
 </style>
