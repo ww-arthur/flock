@@ -56,7 +56,7 @@
             Add your tasks with priorities
           </div>
           <div class="px-3">
-            <transition name="grow-y">
+            <a-transition-grow-y>
               <a-card
                 v-if="newTask || editingTask"
                 class="grow-y-active"
@@ -110,8 +110,8 @@
                   </a-row>
                 </div>
               </a-card>
-            </transition>
-            <transition name="grow-y">
+            </a-transition-grow-y>
+            <a-transition-grow-y>
               <a-button
                 v-if="!newTask && !editingTask"
                 @click="newTask = true"
@@ -123,7 +123,7 @@
                 <a-icon size="2" class="mr-1">plus</a-icon>
                 New task
               </a-button>
-            </transition>
+            </a-transition-grow-y>
           </div>
         </div>
       </template>
